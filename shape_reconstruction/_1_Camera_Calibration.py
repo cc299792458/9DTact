@@ -175,6 +175,7 @@ class CameraCalibration:
 
 
 if __name__ == '__main__':
-    config_path = 'shape_config.yaml'
+    # config_path = 'shape_config.yaml'
+    config_path = '/home/chichu/Documents/9DTact/shape_reconstruction/shape_config.yaml'
     cc = CameraCalibration(config_path)
     cc.run()
