@@ -50,14 +50,19 @@ class CameraCalibration:
         diff = diff * diff_mask
         diff[diff < 5] = 0  # change this threshold for your sensor
         cv2.imshow('diff', diff)
-        binary = cv2.adaptiveThreshold(diff, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 51, 0)
+        binary = cv2.adaptiveThreshold(diff, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 41, 0)
         cv2.imshow('binary', binary)
-        kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (9, 9))
+        kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
         morph = cv2.morphologyEx(binary, cv2.MORPH_CLOSE, kernel)
+        height, width = morph.shape
+        boundary_mask = (np.arange(height)[:, None] < 30) | (np.arange(height)[:, None] > height - 30) | \
+                (np.arange(width)[None, :] < 40) | (np.arange(width)[None, :] > width - 40)
+        morph[boundary_mask] = 0
         cv2.imshow('morph', morph)
         contours, hierarchy = cv2.findContours(morph, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         cv2.drawContours(sample_contours, contours, -1, (0, 255, 0), 3)
         cv2.imshow('contours', sample_contours)
+        cv2.waitKey()
 
         sample_drawing = cv2.cvtColor(sample, cv2.COLOR_GRAY2BGR)
         command_color = (0, 0, 0)
@@ -70,7 +75,7 @@ class CameraCalibration:
         for i in range(len(contours)):
             M = cv2.moments(contours[i])
             # if the area is too big or too small, ignore it
-            if cv2.contourArea(contours[i]) < 200 or cv2.contourArea(contours[i]) > 2000:
+            if cv2.contourArea(contours[i]) < 100 or cv2.contourArea(contours[i]) > 2000:
                 continue
             j += 1
             cx = int(M['m10'] / M['m00'])
