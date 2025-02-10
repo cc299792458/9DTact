@@ -10,11 +10,11 @@ class Visualizer:
 
         # load, color, relocate and add sensor objs
         black_base = open3d.io.read_triangle_mesh(
-            "sensor_obj/black_base.obj")
+            "/home/chichu/Documents/9DTact/shape_reconstruction/sensor_obj/black_base.obj")
         white_shell = open3d.io.read_triangle_mesh(
-            "sensor_obj/white_shell.obj")
+            "/home/chichu/Documents/9DTact/shape_reconstruction/sensor_obj/white_shell.obj")
         black_contact = open3d.io.read_triangle_mesh(
-            "sensor_obj/black_contact.obj")
+            "/home/chichu/Documents/9DTact/shape_reconstruction/sensor_obj/black_contact.obj")
         black_base.compute_vertex_normals()
         white_shell.compute_vertex_normals()
         black_contact.compute_vertex_normals()

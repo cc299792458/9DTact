@@ -3,7 +3,7 @@ import yaml
 from shape_reconstruction import Sensor, Visualizer
 
 if __name__ == '__main__':
-    f = open("shape_config.yaml", 'r+', encoding='utf-8')
+    f = open('/home/chichu/Documents/9DTact/shape_reconstruction/shape_config.yaml', 'r+', encoding='utf-8')
     cfg = yaml.load(f, Loader=yaml.FullLoader)
     sensor = Sensor(cfg)
     visualizer = Visualizer(sensor.points)
