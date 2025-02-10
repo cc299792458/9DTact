@@ -1,5 +1,5 @@
 sensor_id: 1
-calibration_root_dir: ../shape_reconstruction/calibration
+calibration_root_dir: /home/chichu/Documents/9DTact/shape_reconstruction/calibration
 
 camera_setting:
   camera_channel: 2

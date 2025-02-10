@@ -86,6 +86,7 @@ class SensorCalibration:
         cv2.imshow('ref', ref)
         cv2.imshow('img', img)
         cv2.imshow('diff', diff)
+        cv2.waitKey()
         center, detect_radius_p = self.circle_detection(diff)
         if detect_radius_p:
             x = np.linspace(0, diff.shape[0] - 1, diff.shape[0])  # [0, 479]
@@ -135,6 +136,7 @@ class SensorCalibration:
 
 
 if __name__ == '__main__':
-    config_path = 'shape_config.yaml'
+    # config_path = 'shape_config.yaml'
+    config_path = '/home/chichu/Documents/9DTact/shape_reconstruction/shape_config.yaml'
     depth_calibration = SensorCalibration(config_path)
     depth_calibration.run()
